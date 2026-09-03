@@ -1,5 +1,9 @@
 package CrimeAnaylzer;
 
+/**
+ * Represents one crime record read from the CSV file.
+ * Each field matches one column in the crime dataset.
+ */
 public class CrimeRecord {
     public String incidentNumber;
     public String offenseCode;
@@ -14,23 +18,10 @@ public class CrimeRecord {
     public String street;
     public String location;
 
-    public CrimeRecord(){
-
-    }
-
-    public CrimeRecord(String incidentNumber, String offenseCode, String offenseCodeGroup, String offenseDescription, String district, String status, String reportingArea, String  shooting, String occurredOnDate, String ucrPart, String street, String location){
-        this.incidentNumber = incidentNumber;
-        this.offenseCode = offenseCode;
-        this.offenseCodeGroup = offenseCodeGroup;
-        this.offenseDescription = offenseDescription;
-        this.district = district;
-        this.status = status;
-        this.reportingArea = reportingArea;
-        this.shooting = shooting;
-        this.occurredOnDate = occurredOnDate;
-        this.ucrPart = ucrPart;
-        this.street = street;
-        this.location = location;
+    /**
+     * Creates an empty CrimeRecord.
+     */
+    public CrimeRecord() {
     }
 
     public String getIncidentNumber() {
@@ -129,4 +120,3 @@ public class CrimeRecord {
         this.location = location;
     }
 }
-
