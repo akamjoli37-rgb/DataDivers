@@ -1,7 +1,5 @@
 package CrimeAnaylzer;
 
-import Location.Location;
-
 public class CrimeRecord {
     public String incidentNumber;
     public String offenseCode;
@@ -14,13 +12,13 @@ public class CrimeRecord {
     public String occurredOnDate;
     public String ucrPart;
     public String street;
-    public Location location;
+    public String location;
 
     public CrimeRecord(){
 
     }
 
-    public CrimeRecord(String incidentNumber, String offenseCode, String offenseCodeGroup, String offenseDescription, String district, String status, String reportingArea, String  shooting, String occurredOnDate, String ucrPart, String street, Location location){
+    public CrimeRecord(String incidentNumber, String offenseCode, String offenseCodeGroup, String offenseDescription, String district, String status, String reportingArea, String  shooting, String occurredOnDate, String ucrPart, String street, String location){
         this.incidentNumber = incidentNumber;
         this.offenseCode = offenseCode;
         this.offenseCodeGroup = offenseCodeGroup;
@@ -123,11 +121,11 @@ public class CrimeRecord {
         this.street = street;
     }
 
-    public Location getLocation() {
+    public String getLocation() {
         return location;
     }
 
-    public void setLocation(Location location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 }
