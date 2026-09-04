@@ -1,16 +1,16 @@
 package CrimeAnaylzer;
 
-/**
- * Defines the main operation required for analyzing the crime dataset.
- */
+import java.util.List;
+
 public interface CrimeAnalyzerService {
 
-    /**
-     * Reads crime data from a file, performs the analysis,
-     * and saves the answers to another file.
-     *
-     * @param readFrom path of the input crime CSV file
-     * @param saveTo path of the output file
-     */
-    void analyze(String readFrom, String saveTo);
+     List<CrimeRecord> read(String filename);
+     void getCrimeRecord(String filename);
+     int crimeReported(List<CrimeRecord> records);
+     int incidentsInvolvingShootings(List<CrimeRecord> records);
+     int drugViolationIncidents(List<CrimeRecord> records);
+     List<String> mostCommonOffenseCodes(List<CrimeRecord> records);
+     int crimeReported(List<CrimeRecord> records);
+     int shootingCrime(List<CrimeRecord> records);
+
 }
