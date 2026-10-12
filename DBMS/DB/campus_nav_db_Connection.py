@@ -1,4 +1,7 @@
 """
+Team Name: DataDivers
+File Name : campus_nav_db_Connection.py
+Team Members:
 Asive Mjoli 3943507
 Lihle Mabuza 4327587
 Sonwabo Sigidi 4457827
