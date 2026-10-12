@@ -1,0 +1,18 @@
+Question a: How many crimes were reported in the year 2013 and 2014 combined? 
+Answer: 4743
+
+Question b: How many incidents involving shootings were reported in the year “2015” and “2016” combined? 
+Answer: 9
+
+Question c: How many “drug violation” incidents occurred in all Districts “A” and “B” combined? 
+Answer: 1554
+
+Question d: Which were the three most common offense codes in 2016 (sorted in descending order of the number of offenses)? 
+Answer: [3115, 1402, 3006]
+
+Question e: Which two years had the most robberies (sorted in descending order of the number of robberies)? 
+Answer: [2007, 2011]
+
+Question f: Which three Districts had the most “unresolved” crime cases (sorted in descending order of unresolved cases)? 
+Answer: [B2, C11, D4]
+

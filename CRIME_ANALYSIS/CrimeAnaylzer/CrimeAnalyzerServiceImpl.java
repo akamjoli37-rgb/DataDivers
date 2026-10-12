@@ -42,9 +42,73 @@ public class CrimeAnalyzerServiceImpl implements CrimeAnalyzerService {
         }
         return records;
     }
+    /**
+     * Splits one CSV row into individual values while allowing commas
+     * inside quoted values.
+     *
+     * @param line one line from the CSV file
+     * @return an array containing the values from the row
+     */
+    private String[] splitLine(String line) {
+
+        List<String> values = new ArrayList<>();
+        StringBuilder value = new StringBuilder();
+
+        // Tracks whether the current character is inside quotation marks.
+        boolean insideQuotes = false;
+
+        for (int i = 0; i < line.length(); i++) {
+            char c = line.charAt(i);
+
+            if (c == '"') {
+                insideQuotes = !insideQuotes;
+            } else if (c == ',' && !insideQuotes) {
+                // A comma outside quotes marks the end of a CSV value.
+                values.add(value.toString());
+                value.setLength(0);
+            } else {
+                value.append(c);
+            }
+        }
+
+        // Add the final value after the loop ends.
+        values.add(value.toString());
+
+        return values.toArray(new String[0]);
+    }
 
     /**
-     * Counts crimes reported during 2013 and 2014 combined.
+     * Creates a CrimeRecord from the values of one CSV row.
+     *
+     * @param parts the column values from the CSV row
+     * @return a populated CrimeRecord object
+     */
+    private CrimeRecord setCrimeRecord(String[] parts) {
+
+        // A valid row must contain all 12 expected columns.
+        if (parts.length < 12) {
+            throw new IllegalArgumentException("Invalid crime record: expected 12 columns but got " + parts.length);
+        }
+
+        CrimeRecord r = new CrimeRecord();
+        r.setIncidentNumber(parts[0]);
+        r.setOffenseCode(parts[1]);
+        r.setOffenseCodeGroup(parts[2]);
+        r.setOffenseDescription(parts[3]);
+        r.setDistrict(parts[4]);
+        r.setStatus(parts[5]);
+        r.setReportingArea(parts[6]);
+        r.setShooting(parts[7]);
+        r.setOccurredOnDate(parts[8]);
+        r.setUcrPart(parts[9]);
+        r.setStreet(parts[10]);
+        r.setLocation(parts[11]);
+
+        return r;
+    }
+
+    /**
+     * a) Counts crimes reported during 2013 and 2014 combined.
      *
      * @param records the crime records to examine
      * @return the total number of crimes reported in 2013 and 2014
@@ -231,70 +295,6 @@ public class CrimeAnalyzerServiceImpl implements CrimeAnalyzerService {
         return districts.subList(0, Math.min(3, districts.size()));
     }
 
-    /**
-     * Splits one CSV row into individual values while allowing commas
-     * inside quoted values.
-     *
-     * @param line one line from the CSV file
-     * @return an array containing the values from the row
-     */
-    private String[] splitLine(String line) {
-
-        List<String> values = new ArrayList<>();
-        StringBuilder value = new StringBuilder();
-
-        // Tracks whether the current character is inside quotation marks.
-        boolean insideQuotes = false;
-
-        for (int i = 0; i < line.length(); i++) {
-            char c = line.charAt(i);
-
-            if (c == '"') {
-                insideQuotes = !insideQuotes;
-            } else if (c == ',' && !insideQuotes) {
-                // A comma outside quotes marks the end of a CSV value.
-                values.add(value.toString());
-                value.setLength(0);
-            } else {
-                value.append(c);
-            }
-        }
-
-        // Add the final value after the loop ends.
-        values.add(value.toString());
-
-        return values.toArray(new String[0]);
-    }
-
-    /**
-     * Creates a CrimeRecord from the values of one CSV row.
-     *
-     * @param parts the column values from the CSV row
-     * @return a populated CrimeRecord object
-     */
-    private CrimeRecord setCrimeRecord(String[] parts) {
-
-        // A valid row must contain all 12 expected columns.
-        if (parts.length < 12) {
-            throw new IllegalArgumentException("Invalid crime record: expected 12 columns but got " + parts.length);
-        }
-
-        CrimeRecord r = new CrimeRecord();
-        r.setIncidentNumber(parts[0]);
-        r.setOffenseCode(parts[1]);
-        r.setOffenseCodeGroup(parts[2]);
-        r.setOffenseDescription(parts[3]);
-        r.setDistrict(parts[4]);
-        r.setStatus(parts[5]);
-        r.setReportingArea(parts[6]);
-        r.setShooting(parts[7]);
-        r.setOccurredOnDate(parts[8]);
-        r.setUcrPart(parts[9]);
-        r.setStreet(parts[10]);
-        r.setLocation(parts[11]);
-
-        return r;
-    }
 
     /**
      * Reads the input file, performs all required crime analyses,
