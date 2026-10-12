@@ -85,7 +85,7 @@ cursor.execute("""
     JOIN floor f ON f.floor_id = r.floor_id
     JOIN building b ON b.building_id = f.building_id
     WHERE LOWER(r.room_name) LIKE '%computer%'
-       OR r.room_number LIKE '%101%
+       OR r.room_number LIKE '%101%'
 """)
 
 #Print lecture hall and entry node
