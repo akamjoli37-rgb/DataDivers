@@ -8,7 +8,7 @@ Sonwabo Sigidi 4457827
 Wandile Mtsweni 4202706
 Masingita Baloyi 4253292
 Lutho Dyudu 4458378
-""""
+"""
 
 import mysql.connector
 
